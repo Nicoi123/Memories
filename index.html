@@ -4,29 +4,32 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Воспоминания</title>
-<!-- Подключение шрифта с Google Fonts (замените на свой, если нужно) -->
+<!-- Подключение шрифта с Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Francois+One&family=Lilita+One&display=swap" rel="stylesheet">
 
 <style>
-  /* Вставка собственного шрифта */
+  /* Общие стили для тела */
   body {
     margin: 0;
     font-family: "Lilita One", sans-serif;
-    background: url('images/rose.jpg');
+    background: url('images/rose.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
   }
 
+  /* Контейнер с ограниченной шириной и внутренним отступом */
   .container {
     text-align: center;
     position: relative;
     max-width: 1200px;
     padding: 70px;
+    width: 90%; /* чтобы было немного отступа по бокам на мобильных */
   }
 
-  /* Эффект появления текста сверху вниз */
+  /* Заголовок "MEMORIES" */
   .central-text {
     font-size: 6em;
     margin-bottom: 90px;
@@ -42,7 +45,7 @@
     }
   }
 
-  /* Общие стили для изображений */
+  /* Обертка для строк изображений */
   .images-row {
     display: flex;
     justify-content: center;
@@ -50,7 +53,7 @@
     flex-wrap: wrap;
   }
 
-  /* Размеры изображений и эффекты */
+  /* Стили изображений */
   .images-row img {
     width: 250px;
     height: 150px;
@@ -77,7 +80,7 @@
     background: rgba(0, 0, 0, 0.3);
   }
 
-  /* Модальное окно для ввода кода */
+  /* Модальное окно */
   .modal {
     display: none;
     position: fixed;
@@ -98,6 +101,7 @@
     text-align: center;
   }
 
+  /* Стили для поля ввода и кнопок */
   .modal input[type="password"] {
     width: 80%;
     padding: 10px;
@@ -122,6 +126,30 @@
   .modal button:hover {
     background-color: #e2000086;
   }
+
+  /* Медиазапросы для мобильных устройств */
+  @media(max-width: 768px) {
+    body {
+      /* Можно добавить другие стили для фона, если нужно */
+    }
+
+    /* Уменьшаем размер шрифта для мобильных */
+    .central-text {
+      font-size: 3em;
+      margin-bottom: 50px;
+    }
+
+    /* Размер изображений на мобильных */
+    .images-row img {
+      width: 150px;
+      height: 100px;
+    }
+
+    /* Можно изменить паддинг контейнера */
+    .container {
+      padding: 30px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -136,7 +164,7 @@
     <img src="images/un.jpg" data-link="stories3.html" data-password="пароль3" class="big-img" alt="Большая 3" />
   </div>
 
-  <!-- Нижние одинакового размера картинки -->
+  <!-- Нижние маленькие картинки -->
   <div class="images-row" style="margin-top:30px;">
     <img src="images/un.jpg" data-link="stories4.html" data-password="парольA" class="small-img" alt="Маленькая 1" />
     <img src="images/un.jpg" data-link="stories5.html" data-password="парольB" class="small-img" alt="Маленькая 2" />
@@ -144,7 +172,7 @@
   </div>
 </div>
 
-<!-- Модальное окно для ввода кода -->
+<!-- Модальное окно -->
 <div class="modal" id="codeModal">
   <div class="modal-content">
     <h3>Нужен пароль.</h3>
@@ -175,7 +203,6 @@
     codeInput.value = '';
     codeInput.focus();
 
-    // Обнуляем обработчик, чтобы не накапливать
     document.getElementById('submitCode').onclick = () => {
       if (codeInput.value === currentPassword) {
         window.location.href = currentLink;
@@ -185,11 +212,7 @@
     };
   }
 
-  // Инициализация для всех изображений
-  document.querySelectorAll('.big-img').forEach(img => {
-    setupImageClick(img);
-  });
-  document.querySelectorAll('.small-img').forEach(img => {
+  document.querySelectorAll('.big-img, .small-img').forEach(img => {
     setupImageClick(img);
   });
 
