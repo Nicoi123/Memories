@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 
 <style>
+  /* Вставка собственного шрифта */
   body {
     margin: 0;
     font-family: "Lilita One", sans-serif;
@@ -17,22 +18,25 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    overflow-x: hidden;
   }
 
-  /* Текст "MEMORIES" */
+  /* Эффект появления текста */
   #centralText {
-    font-size: 8vw;
+    font-size: 6em;
+    margin-bottom: 90px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 2s forwards;
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
     text-align: center;
-    margin: 20px 0;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
   }
 
-  @keyframes fadeIn {
+  @keyframes fadeInDown {
     to {
       opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -52,9 +56,23 @@
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
   }
 
-  /* Размер и эффект изображений */
+  /* Анимация появления */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Размеры и эффект изображений */
   .images-row img {
     cursor: pointer;
     border: 2px solid #ccc;
@@ -64,28 +82,17 @@
     height: 150px;
     max-width: 100%;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1s forwards;
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   }
 
-  /* Анимация появления изображений */
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Эффекты при наведении на картинки */
+  /* Эффекты при наведении */
   .images-row img:hover {
     border-color: #fff;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     transform: scale(1.05);
   }
 
-  /* Модальное окно */
+  /* Модальное окно для ввода */
   .modal {
     display: none;
     position: fixed;
@@ -95,26 +102,24 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    backdrop-filter: blur(4px);
   }
 
-  /* Контент модального окна */
+  /* Стиль окна */
   .modal-content {
     background: #a80000;
     padding: 20px;
     border-radius: 10px;
     width: 80%;
     max-width: 400px;
-    box-sizing: border-box;
-    text-align: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    animation: popIn 0.3s ease-out;
+    transform: scale(0.8);
+    opacity: 0;
+    animation: popIn 0.3s forwards;
+    text-align: center;
   }
 
   @keyframes popIn {
-    from {
-      transform: scale(0.8);
-      opacity: 0;
-    }
     to {
       transform: scale(1);
       opacity: 1;
@@ -173,7 +178,7 @@
     <img src="images/n3.jpg" data-link="story3.html" data-password="Flowers" alt="Ненавижу" />
   </div>
 
-  <!-- Нижние маленькие картинки -->
+  <!-- Нижние одинакового размера картинки -->
   <div class="images-row" style="margin-top:30px;">
     <img src="images/un.jpg" data-link="story4.html" data-password="парольA" alt="Маленькая 1" />
     <img src="images/un.jpg" data-link="story5.html" data-password="парольB" alt="Маленькая 2" />
@@ -181,7 +186,7 @@
   </div>
 </div>
 
-<!-- Модальное окно -->
+<!-- Модальное окно для ввода пароля -->
 <div class="modal" id="codeModal">
   <div class="modal-content">
     <h3>Нужен пароль.</h3>
@@ -221,7 +226,10 @@
     };
   }
 
-  document.querySelectorAll('img').forEach(img => {
+  document.querySelectorAll('.big-img').forEach(img => {
+    setupImageClick(img);
+  });
+  document.querySelectorAll('.small-img').forEach(img => {
     setupImageClick(img);
   });
 
