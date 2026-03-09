@@ -180,7 +180,7 @@
   </div>
 </div>
 
-<!-- Модальное окно для ввода пароля -->
+<!-- Модальное окно для ввода кода -->
 <div class="modal" id="codeModal">
   <div class="modal-content">
     <h3>Нужен пароль.</h3>
@@ -211,6 +211,7 @@
     codeInput.value = '';
     codeInput.focus();
 
+    // Обнуляем обработчик, чтобы не накапливать
     document.getElementById('submitCode').onclick = () => {
       if (codeInput.value === currentPassword) {
         window.location.href = currentLink;
@@ -220,6 +221,7 @@
     };
   }
 
+  // Инициализация для всех изображений
   document.querySelectorAll('.big-img').forEach(img => {
     setupImageClick(img);
   });
@@ -237,9 +239,6 @@
     }
   };
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
