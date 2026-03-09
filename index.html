@@ -167,16 +167,16 @@
   
   <!-- Верхние большие картинки -->
   <div class="images-row">
-    <img src="images/n1.jpg" data-link="story1.html" data-password="The black rose" alt="Она мертва" />
-    <img src="images/n2.jpg" data-link="story2.html" data-password="Existence" alt="Люди" />
-    <img src="images/n3.jpg" data-link="story3.html" data-password="Flowers" alt="Ненавижу" />
+    <img src="images/n1.jpg" data-link="story1.html" data-password="The black rose" alt="Она мертва" class="clickable" />
+    <img src="images/n2.jpg" data-link="story2.html" data-password="Existence" alt="Люди" class="clickable" />
+    <img src="images/n3.jpg" data-link="story3.html" data-password="Flowers" alt="Ненавижу" class="clickable" />
   </div>
 
   <!-- Нижние маленькие картинки -->
   <div class="images-row" style="margin-top:30px;">
-    <img src="images/un.jpg" data-link="story4.html" data-password="парольA" alt="Маленькая 1" />
-    <img src="images/un.jpg" data-link="story5.html" data-password="парольB" alt="Маленькая 2" />
-    <img src="images/un.jpg" data-link="story6.html" data-password="парольC" alt="Маленькая 3" />
+    <img src="images/un.jpg" data-link="story4.html" data-password="парольA" alt="Маленькая 1" class="clickable" />
+    <img src="images/un.jpg" data-link="story5.html" data-password="парольB" alt="Маленькая 2" class="clickable" />
+    <img src="images/un.jpg" data-link="story6.html" data-password="парольC" alt="Маленькая 3" class="clickable" />
   </div>
 </div>
 
@@ -215,17 +215,15 @@
     document.getElementById('submitCode').onclick = () => {
       if (codeInput.value === currentPassword) {
         window.location.href = currentLink;
+        modal.style.display = 'none'; // закрытие модалки после перехода
       } else {
         alert('Неверный код!');
       }
     };
   }
 
-  // Инициализация для всех изображений
-  document.querySelectorAll('.big-img').forEach(img => {
-    setupImageClick(img);
-  });
-  document.querySelectorAll('.small-img').forEach(img => {
+  // Инициализация для всех изображений внутри .images-row
+  document.querySelectorAll('.images-row img').forEach(img => {
     setupImageClick(img);
   });
 
@@ -242,6 +240,7 @@
 
 </body>
 </html>
+
 
 
 
