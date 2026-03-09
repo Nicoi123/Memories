@@ -10,94 +10,108 @@
 <style>
   /* Вставка собственного шрифта */
   body {
-    margin: 0;
-    font-family: "Lilita One", sans-serif;
-    background: url('images/rose.jpg');
-    display: flex;
+  margin: 0;
+  font-family: "Lilita One", sans-serif;
+  background: url('images/rose.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+  /* Обертка для центрации текста */
+  .central-container {
+    position: fixed; /* чтобы было поверх всего */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex; /* флекс для центрирования */
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    z-index: 999; /* поверх всего */
+    background: transparent; /* прозрачный фон */
   }
 
+  /* Стиль текста "MEMORIES" */
+  #centralText {
+    font-size: 6em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin: 0;
+  }
+
+  /* Контейнер для текста и изображений */
   .container {
     text-align: center;
     position: relative;
     max-width: 1200px;
-    padding: 70px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
   }
 
-  /* Эффект появления текста сверху вниз */
-  .central-text {
-    font-size: 6em;
-    margin-bottom: 90px;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInDown 2s forwards;
-  }
-
-  @keyframes fadeInDown {
+  /* В центре эффект появления текста */
+  /* Удалена, так как текст в центре, а не анимация появления */
+  /* @keyframes fadeInDown {
     to {
       opacity: 1;
       transform: translateY(0);
     }
-  }
+  } */
 
-  /* Общие стили для изображений */
+  /* Общий стиль для строк с изображениями */
   .images-row {
     display: flex;
     justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 20px;
   }
 
-  /* Размеры изображений и эффекты */
+  /* Стиль изображений */
   .images-row img {
-    width: 250px;
-    height: 150px;
-    object-fit: cover;
     cursor: pointer;
     border: 2px solid #ccc;
     border-radius: 8px;
-    position: relative;
-    transition: transform 0.3s, border-color 0.3s;
+    object-fit: cover;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    width: 250px;
+    height: 150px;
   }
 
-  /* Эффект затемнения при наведении */
-  .images-row img::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0);
-    border-radius: 8px;
-    transition: background 0.3s;
-    pointer-events: none;
+  /* Эффект при наведении */
+  .images-row img:hover {
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+    transform: scale(1.05);
   }
 
-  .images-row img:hover::after {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  /* Модальное окно для ввода кода */
+  /* Модальное окно */
   .modal {
     display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.897);
+    background: rgba(0, 0, 0, 0.9);
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    padding: 10px;
   }
 
+  /* Контент модального окна */
   .modal-content {
     background: #a80000;
-    padding: 20px 30px;
+    padding: 20px;
     border-radius: 10px;
-    max-width: 400px;
-    width: 80%;
+    max-width: 90%;
+    width: 400px;
+    box-sizing: border-box;
     text-align: center;
   }
 
+  /* Поле ввода */
   .modal input[type="password"] {
     width: 80%;
     padding: 10px;
@@ -105,8 +119,10 @@
     font-size: 1em;
     border: 1px solid #d60000;
     border-radius: 4px;
+    box-sizing: border-box;
   }
 
+  /* Кнопки */
   .modal button {
     margin-top: 15px;
     padding: 10px 20px;
@@ -119,16 +135,58 @@
     transition: background 0.3s;
   }
 
+  /* Ховер для кнопки */
   .modal button:hover {
     background-color: #e2000086;
+  }
+
+  /* Медиазапросы для мобильных устройств */
+  @media(max-width: 768px) {
+    /* Уменьшаем размер текста и отступы */
+    #centralText {
+      font-size: 4em;
+      margin-bottom: 50px;
+    }
+    /* Изображения */
+    .images-row img {
+      width: 200px;
+      height: 120px;
+    }
+    /* Размер шрифта и поля ввода */
+    .modal input[type="password"] {
+      width: 100%;
+    }
+    /* Кнопки */
+    .modal button {
+      width: 100%;
+      padding: 10px 0;
+    }
+    /* Контейнер */
+    .container {
+      padding: 10px;
+    }
+  }
+
+  /* Еще меньше экранов */
+  @media(max-width: 480px) {
+    #centralText {
+      font-size: 3em;
+    }
+    .images-row img {
+      width: 150px;
+      height: 80px;
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="central-text" id="centralText">MEMORIES</div>
+<!-- Обертка для центрирования текста "MEMORIES" -->
+<div class="central-container">
+  <div id="centralText">MEMORIES</div>
+</div>
 
+<div class="container">
   <!-- Верхние большие картинки -->
   <div class="images-row">
     <img src="images/n1.jpg" data-link="story1.html" data-password="The black rose" class="big-img" alt="Она мертва" />
@@ -175,7 +233,6 @@
     codeInput.value = '';
     codeInput.focus();
 
-    // Обнуляем обработчик, чтобы не накапливать
     document.getElementById('submitCode').onclick = () => {
       if (codeInput.value === currentPassword) {
         window.location.href = currentLink;
@@ -185,7 +242,6 @@
     };
   }
 
-  // Инициализация для всех изображений
   document.querySelectorAll('.big-img').forEach(img => {
     setupImageClick(img);
   });
@@ -205,7 +261,7 @@
 </script>
 
 </body>
-</html> 
+</html>
 
 
 
