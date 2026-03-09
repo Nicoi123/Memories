@@ -8,27 +8,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 
 <style>
-  /* Вставка собственного шрифта */
   body {
     margin: 0;
     font-family: "Lilita One", sans-serif;
-    background: url('images/rose.jpg') no-repeat center center;
-    background-size: cover;
+    background-color: #000; /* черный фон */
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    overflow-x: hidden;
+    color: white;
   }
 
-  /* Эффект появления текста */
+  /* Заголовок */
   #centralText {
     font-size: 6em;
     margin-bottom: 90px;
     opacity: 0;
     transform: translateY(-20px);
     animation: fadeInDown 2s forwards;
-    color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
     text-align: center;
   }
@@ -60,7 +57,6 @@
     animation: fadeInUp 1s ease forwards;
   }
 
-  /* Анимация появления */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -72,7 +68,7 @@
     }
   }
 
-  /* Размеры и эффект изображений */
+  /* Размеры и эффекты изображений */
   .images-row img {
     cursor: pointer;
     border: 2px solid #ccc;
@@ -82,14 +78,15 @@
     height: 150px;
     max-width: 100%;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s, filter 0.3s;
   }
 
-  /* Эффекты при наведении */
+  /* Плавный переход при наведении */
   .images-row img:hover {
     border-color: #fff;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     transform: scale(1.05);
+    filter: brightness(1.1);
   }
 
   /* Модальное окно для ввода */
@@ -105,7 +102,6 @@
     backdrop-filter: blur(4px);
   }
 
-  /* Стиль окна */
   .modal-content {
     background: #a80000;
     padding: 20px;
@@ -126,7 +122,6 @@
     }
   }
 
-  /* Поле ввода */
   #codeInput {
     width: 80%;
     padding: 10px;
@@ -136,7 +131,6 @@
     border-radius: 4px;
   }
 
-  /* Кнопки */
   .modal button {
     margin-top: 15px;
     padding: 10px 20px;
@@ -178,7 +172,7 @@
     <img src="images/n3.jpg" data-link="story3.html" data-password="Flowers" alt="Ненавижу" />
   </div>
 
-  <!-- Нижние одинакового размера картинки -->
+  <!-- Нижние маленькие картинки -->
   <div class="images-row" style="margin-top:30px;">
     <img src="images/un.jpg" data-link="story4.html" data-password="парольA" alt="Маленькая 1" />
     <img src="images/un.jpg" data-link="story5.html" data-password="парольB" alt="Маленькая 2" />
@@ -246,3 +240,7 @@
 
 </body>
 </html>
+
+</body>
+</html>
+
