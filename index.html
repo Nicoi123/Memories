@@ -8,49 +8,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Francois+One&family=Lilita+One&display=swap" rel="stylesheet">
 
 <style>
-  /* Общие стили для тела страницы */
+  /* Вставка собственного шрифта */
   body {
     margin: 0;
     font-family: "Lilita One", sans-serif;
-    background: url('images/rose.jpg') no-repeat center center;
-    background-size: cover;
+    background: url('images/rose.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    padding: 10px;
   }
 
-  /* Обертка для центрирования текста по экрану */
-  .central-container {
-    position: fixed; /* чтобы фиксировать по экрану */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex; /* используем флекс для центрирования */
-    justify-content: center; /* по горизонтали */
-    align-items: center; /* по вертикали */
-    z-index: 999; /* поверх всего */
-    background: transparent; /* прозрачный фон */
-  }
-
-  /* Стиль текста "MEMORIES" */
-  .central-text {
-    font-size: 6em;
-    color: white; /* чтобы было видно на фоне */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* тень для читаемости */
-    opacity: 1; /* полностью видимо */
-    /* Можно оставить анимацию, если хотите эффект появления */
-  }
-
-  /* Контейнер для изображений и другого контента */
   .container {
+    text-align: center;
     position: relative;
     max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 70px;
   }
 
-  /* Анимация появления текста (можно оставить или убрать) */
+  /* Эффект появления текста сверху вниз */
+  .central-text {
+    font-size: 6em;
+    margin-bottom: 90px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 2s forwards;
+  }
+
   @keyframes fadeInDown {
     to {
       opacity: 1;
@@ -58,57 +42,62 @@
     }
   }
 
-  /* Стиль для строк с изображениями */
+  /* Общие стили для изображений */
   .images-row {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 20px;
+    flex-wrap: wrap;
   }
 
-  /* Стиль изображений */
+  /* Размеры изображений и эффекты */
   .images-row img {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
     cursor: pointer;
     border: 2px solid #ccc;
     border-radius: 8px;
-    object-fit: cover;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-    width: 250px;
-    height: 150px;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
   }
 
-  /* Эффект при наведении */
-  .images-row img:hover {
-    border-color: #fff;
-    box-shadow: 0 0 10px rgba(255,255,255,0.8);
-    transform: scale(1.05);
+  /* Эффект затемнения при наведении */
+  .images-row img::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 8px;
+    transition: background 0.3s;
+    pointer-events: none;
   }
 
-  /* Модальное окно */
+  .images-row img:hover::after {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Модальное окно для ввода кода */
   .modal {
     display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.897);
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    padding: 10px;
   }
 
-  /* Контент модального окна */
   .modal-content {
     background: #a80000;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 10px;
-    max-width: 90%;
-    width: 400px;
-    box-sizing: border-box;
+    max-width: 400px;
+    width: 80%;
     text-align: center;
   }
 
-  /* Поле ввода */
   .modal input[type="password"] {
     width: 80%;
     padding: 10px;
@@ -116,10 +105,8 @@
     font-size: 1em;
     border: 1px solid #d60000;
     border-radius: 4px;
-    box-sizing: border-box;
   }
 
-  /* Кнопки */
   .modal button {
     margin-top: 15px;
     padding: 10px 20px;
@@ -132,56 +119,16 @@
     transition: background 0.3s;
   }
 
-  /* Ховер для кнопки */
   .modal button:hover {
     background-color: #e2000086;
-  }
-
-  /* Медиазапросы для мобильных устройств */
-  @media(max-width: 768px) {
-    .central-text {
-      font-size: 4em;
-      margin-bottom: 50px;
-    }
-    .images-row img {
-      width: 200px;
-      height: 120px;
-    }
-    .modal input[type="password"] {
-      width: 100%;
-    }
-    .modal button {
-      width: 100%;
-      padding: 10px 0;
-    }
-    .container {
-      padding: 10px;
-    }
-  }
-
-  @media(max-width: 480px) {
-    .central-text {
-      font-size: 3em;
-    }
-    .images-row img {
-      width: 150px;
-      height: 80px;
-    }
   }
 </style>
 </head>
 <body>
 
-<!-- Обертка для центрации текста "MEMORIES" -->
-<div class="central-container">
-  <div class="central-text" id="centralText">MEMORIES</div>
-</div>
-
-<!-- Остальной контент остается без изменений -->
 <div class="container">
-  <!-- Можно оставить или убрать, если нужен только центрированный текст -->
-  <!-- Тут ваш код с изображениями и т.д. -->
-  <!-- Например, добавлю ваши изображения ниже, чтобы сохранить структуру -->
+  <div class="central-text" id="centralText">MEMORIES</div>
+
   <!-- Верхние большие картинки -->
   <div class="images-row">
     <img src="images/n1.jpg" data-link="story1.html" data-password="The black rose" class="big-img" alt="Она мертва" />
@@ -258,7 +205,7 @@
 </script>
 
 </body>
-</html>
+</html> 
 
 
 
